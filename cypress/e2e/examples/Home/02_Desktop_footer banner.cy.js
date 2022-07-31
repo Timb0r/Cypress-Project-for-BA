@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 describe('Scrolls down to footer, clicks cookie banner, checks if impressum is visible', () => {
     it('click banner, check elements', () => {
         cy.visit('https://cy-borg.net/hortt-dev/');

@@ -2,13 +2,12 @@ Cypress.Commands.add('inHeader', (callback) => {
     cy.get('header').within(callback);
 });
 
-describe('header test', () => {
+describe('check headerimage and content', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
         cy.visit('https://cy-borg.net/hortt-dev/');
     });
     context('check topheader links', () => {
-        //Check for all 3 toplinks //
         it('check adress link', () => {
             cy.inHeader(() => {
                 const adressLink = cy.get('a.topHeader__topLink').first();

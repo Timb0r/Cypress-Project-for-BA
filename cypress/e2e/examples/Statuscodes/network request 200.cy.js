@@ -1,5 +1,4 @@
-/// <reference types="cypress" />
-describe('status 200', () => {
+describe('Website reachable statuscode 200', () => {
     it('status 200', () => {
         cy.request({
             url: 'https://cy-borg.net/hortt-dev/#/',

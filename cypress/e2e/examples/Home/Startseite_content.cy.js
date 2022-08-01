@@ -3,10 +3,10 @@ Cypress.Commands.add('inContent', (callback) => {
 });
 
 describe('Check homepage and content', () => {
-    beforeEach(() => {
-        cy.visit('https://cy-borg.net/hortt-dev/');
-    });
     context('check home content', () => {
+        beforeEach(() => {
+            cy.visit('https://cy-borg.net/hortt-dev/');
+        });
         it('check headline', () => {
             cy.inContent(() => {
                 cy.get('.contentRow');
@@ -60,8 +60,8 @@ describe('Check homepage and content', () => {
                     )
                     .should('be.visible');
                 cy.get('div.contentRow');
-                const horttPortrait = cy.get('img.home__image');
-                horttPortrait
+                const portrait = cy.get('img.home__image');
+                portrait
                     .should('be.visible')
                     .should('have.attr', 'src', 'img/hortt_rhein.jpg')
                     .should('have.attr', 'alt', 'hortt_rhein');

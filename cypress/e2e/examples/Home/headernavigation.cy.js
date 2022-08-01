@@ -15,11 +15,11 @@ describe('navigation area and linkgoals', () => {
         });
         it('check linkgoals', () => {
             cy.inHeader(() => {
-                cy.get('a[href*="#/übermich"]').should('be.visible'),
-                    cy.get('a[href*="#/beratung"]').should('be.visible'),
-                    cy.get('a[href*="#/"]').should('be.visible'),
-                    cy.get('a[href*="#/service"]').should('be.visible'),
-                    cy.get('a[href*="#/kontakt"]').should('be.visible');
+                cy.get('a[href*="#/übermich"]').should('be.visible');
+                cy.get('a[href*="#/beratung"]').should('be.visible');
+                cy.get('a[href*="#/"]').should('be.visible');
+                cy.get('a[href*="#/service"]').should('be.visible');
+                cy.get('a[href*="#/kontakt"]').should('be.visible');
             });
         });
     });

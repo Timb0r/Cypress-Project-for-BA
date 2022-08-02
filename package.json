@@ -1,10 +1,10 @@
 {
-  "name": "cypressframework",
-  "version": "1.0.0",
-  "description": "Cypress project for BA",
-  "main": "index.js",
-  "scripts": {
-    "test": "test",
+    "name": "cypressframework",
+    "version": "1.0.0",
+    "description": "Cypress project for BA",
+    "main": "index.js",
+    "scripts": {
+        "test": "test",
     "cypress:open": "cypress open"
   },
   "repository": {

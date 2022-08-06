@@ -1,6 +1,6 @@
 export default {
     cookieBanner: '[data-component="cookieBanner"]',
-    cookiebutton: '[data-component="button"]',
+    button: '[data-component="button"]',
     topHeader: '[data-component="topHeader"]',
     headerMobile: '[data-component="headerMobile"]',
     link: '[data-component="link"]',

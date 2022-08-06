@@ -5,7 +5,7 @@ Cypress.Commands.add('inHeader', (callback) => {
     cy.get('header').within(callback);
 });
 
-describe('navigation area and linkgoals', () => {
+describe('navigation area and navigation items', () => {
     beforeEach(() => {
         cy.visit(routes.home);
     });

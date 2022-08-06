@@ -12,7 +12,7 @@ describe('navigation area and navigation items', () => {
     context('navigation area and linkgoals', () => {
         it('check navlinks', () => {
             cy.inHeader(() => {
-                cy.get('nav.topHeader__navigation').should('be.visible');
+                cy.get('nav').should('be.visible');
             });
         });
         it('check linkgoals', () => {

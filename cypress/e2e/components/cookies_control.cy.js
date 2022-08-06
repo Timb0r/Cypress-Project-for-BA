@@ -15,7 +15,7 @@ describe('cookie control tests', () => {
         });
 
         it('should be true after clicking cookies button', () => {
-            cy.get('.cookieBanner > .btn').click();
+            cy.inBanner(() => { cy.get(selectors.button).click(); }
             cy.getLocalStorage('cookie:accepted').should('equal', 'true');
         });
     });

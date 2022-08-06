@@ -5,25 +5,25 @@
     "main": "index.js",
     "scripts": {
         "test": "test",
-    "cypress:open": "cypress open"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Timb0r/Cypress-Project-for-BA.git"
-  },
-  "author": "timb0r",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Timb0r/Cypress-Project-for-BA/issues"
-  },
-  "homepage": "https://github.com/Timb0r/Cypress-Project-for-BA#readme",
-  "devDependencies": {
-    "cypress": "^10.3.0",
-    "cypress-localstorage-commands": "^1.5.0",
-    "eslint": "^8.1.0",
-    "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "2.4.1"
-  },
-  "dependencies": {}
+        "cypress:open": "cypress open"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Timb0r/Cypress-Project-for-BA.git"
+    },
+    "author": "timb0r",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Timb0r/Cypress-Project-for-BA/issues"
+    },
+    "homepage": "https://github.com/Timb0r/Cypress-Project-for-BA#readme",
+    "devDependencies": {
+        "cypress": "^10.3.0",
+        "cypress-localstorage-commands": "^1.5.0",
+        "eslint": "^8.1.0",
+        "eslint-plugin-cypress": "^2.12.1",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "2.4.1"
+    },
+    "dependencies": {}
 }

@@ -31,7 +31,7 @@ export default {
     bottomFooter: '[data-component="bottomFooter"]',
     h1: '[data-mod="h1"]',
     h2: '[data-mod="h2"]',
-    banner: '[data-mod="banner"]',
+    banner: '[data-component="link"][data-mod="banner"]',
     interestCalculator: '[data-mod="interestCalculator"]',
     mortgageRequest: '[data-mod="mortgageRequest"]',
     getToKnowMe: '[data-mod="getToKnowMe"]',

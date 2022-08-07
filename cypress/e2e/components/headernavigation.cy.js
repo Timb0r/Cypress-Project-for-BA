@@ -5,14 +5,14 @@ Cypress.Commands.add('inHeader', (callback) => {
     cy.get('header').within(callback);
 });
 
-describe('navigation area and linkgoals', () => {
+describe('navigation area and navigation items', () => {
     beforeEach(() => {
         cy.visit(routes.home);
     });
     context('navigation area and linkgoals', () => {
         it('check navlinks', () => {
             cy.inHeader(() => {
-                cy.get('nav.topHeader__navigation').should('be.visible');
+                cy.get('nav').should('be.visible');
             });
         });
         it('check linkgoals', () => {

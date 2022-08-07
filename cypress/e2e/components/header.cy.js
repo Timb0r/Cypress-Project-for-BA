@@ -1,23 +1,25 @@
+import selectors from '../constants/selectors';
+import { routes } from '../constants/url';
+
 Cypress.Commands.add('inHeader', (callback) => {
     cy.get('header').within(callback);
 });
 
-describe('header test', () => {
+describe('check headerimage and content', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
-        cy.visit('https://cy-borg.net/hortt-dev/');
+        cy.visit(routes.home);
     });
     context('check topheader links', () => {
-        //Check for all 3 toplinks //
         it('check adress link', () => {
             cy.inHeader(() => {
-                const adressLink = cy.get('a.topHeader__topLink').first();
+                const adressLink = cy.get(selectors.link);
                 adressLink
                     .should('be.visible')
                     .should(
                         'have.attr',
                         'href',
-                        'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJWyqed_swv0cRHVz_JtTf3is&key=AIzaSyBTbcdtZtzIhGxf_NGZMl_7DnltsEACCQ0',
+                        'https://goo.gl/maps/xbWR9XYkN4PDnfGh8', // URL hat sich geändert und deshalb failed. daher besser lösen single point of truth?
                     )
                     .should('have.attr', 'target', '_blank');
             });

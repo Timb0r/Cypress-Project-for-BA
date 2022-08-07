@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 describe('status 404', () => {
     it('status 404', () => {
         cy.request({

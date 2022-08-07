@@ -1,4 +1,3 @@
-import selectors from '../constants/selectors';
 import { routes } from '../constants/url';
 
 Cypress.Commands.add('inHead', (callback) => {

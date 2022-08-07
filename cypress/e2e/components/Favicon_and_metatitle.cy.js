@@ -1,4 +1,3 @@
-import selectors from '../constants/selectors';
 import { routes } from '../constants/url';
 
 Cypress.Commands.add('inHead', (callback) => {
@@ -9,12 +8,18 @@ describe('Check favicon and website title in browser tab', () => {
     beforeEach(() => {
         cy.visit(routes.home);
     });
-    //Check browsertab for correct favicon and title
     it('check favicon', () => {
         cy.inHead(() => {
-            cy.contains('head')
-                .should('have.attr', 'href', 'favicon.ico')
-                .and('be.visible');
+            const link = cy.get('link').first();
+            link.should('have.attr', 'href', 'favicon.ico');
+        });
+    });
+    it('check metatitle', () => {
+        cy.inHead(() => {
+            cy.get('title').should(
+                'contain',
+                'Manfred Hortt - Bankfachwirt & Baufinanzierung',
+            );
         });
     });
 });

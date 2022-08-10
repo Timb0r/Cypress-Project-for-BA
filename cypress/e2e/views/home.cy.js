@@ -1,10 +1,6 @@
 import selectors from '../constants/selectors';
 import { routes } from '../constants/url';
 
-Cypress.Commands.add('inContent', (callback) => {
-    cy.get('main').within(callback);
-});
-
 describe('Check homepage and content', () => {
     beforeEach(() => {
         cy.visit(routes.home);

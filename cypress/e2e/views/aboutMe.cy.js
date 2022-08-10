@@ -13,7 +13,7 @@ describe('Check aboutme page and content', () => {
     });
     context('check content box elements', () => {
         it('check name headline and subheadline', () => {
-            cy.get(selectors.contentCard).within(($contentCard) => {
+            cy.get(selectors.contentCard).within(() => {
                 cy.get(selectors.headline + selectors.h2).should(
                     'contain',
                     'Manfred Hortt',
@@ -26,7 +26,7 @@ describe('Check aboutme page and content', () => {
         });
     });
     it('check image', () => {
-        cy.get(selectors.contentCard).within(($contentCard) => {
+        cy.get(selectors.contentCard).within(() => {
             cy.get('img')
                 .should('be.visible')
                 .should('have.attr', 'src', 'img/aboutMe.jpg')
@@ -34,7 +34,7 @@ describe('Check aboutme page and content', () => {
         });
     });
     it('check "Eckdaten" section', () => {
-        cy.get(selectors.contentCard).within(($contentCard) => {
+        cy.get(selectors.contentCard).within(() => {
             cy.contains('Ein paar Eckdaten zu mir:').should('be.visible');
             cy.get('ul.aboutMe__basicInfoList')
                 .children()

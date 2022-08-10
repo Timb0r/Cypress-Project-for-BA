@@ -10,7 +10,7 @@ describe('Check service page and content', () => {
     });
     context('check contentrow', () => {
         it('check contentcard', () => {
-            cy.get(selectors.contentCard).within(($contentCard) => {
+            cy.get(selectors.contentCard).within(() => {
                 cy.get(selectors.button).should('contain', 'Zinssuche');
                 cy.get(selectors.button).should('contain', 'Antrag');
                 cy.get('p').should('have.length', 5);

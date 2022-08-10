@@ -13,6 +13,7 @@ describe('Check homepage and content', () => {
             cy.get(selectors.contentCard).within(($contentCard) => {
                 cy.get(selectors.button).should('contain', 'Zinssuche');
                 cy.get(selectors.button).should('contain', 'Antrag');
+                cy.get('p').should('have.length', 7);
             });
         });
         it('check second contentcard', () => {

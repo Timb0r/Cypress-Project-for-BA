@@ -11,8 +11,14 @@ describe('Check homepage and content', () => {
     context('check contentrows', () => {
         it('check first contentcard', () => {
             cy.get(selectors.contentCard).within(() => {
-                cy.get(selectors.button).should('contain', 'Zinssuche');
-                cy.get(selectors.button).should('contain', 'Antrag');
+                cy.get(selectors.interestCalculatorButton).should(
+                    'contain',
+                    'Zinssuche',
+                );
+                cy.get(selectors.mortgageRequestButton).should(
+                    'contain',
+                    'Antrag',
+                );
                 cy.get('p').should('have.length', 7);
             });
         });
@@ -35,7 +41,7 @@ describe('Check homepage and content', () => {
                     'Bankfachwirt',
                 ); // find solution for checking the whole text with br between (Bankfachwirt br Baufinanzierung) //
                 cy.get(selectors.introHints).should('contain', 'Kompetent'); // find solution for checking the whole text with br between
-                cy.get(selectors.button).should(
+                cy.get(selectors.getToKnowMeButton).should(
                     'contain',
                     'Lernen sie mich kennen',
                 );

@@ -10,7 +10,7 @@ describe('Check contact page and content', () => {
     });
     context('check contentcards and contents', () => {
         it('check first contentcard and contact form inputfields', () => {
-            cy.get(selectors.contentCard).within(() => {
+            cy.get(selectors.contentCard).first().within(() => {
                 cy.get(selectors.inputField)
                     .should('have.length', 5)
                     .and('be.visible');

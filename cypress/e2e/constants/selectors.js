@@ -1,6 +1,10 @@
 export default {
     cookieBanner: '[data-component="cookieBanner"]',
     button: '[data-component="button"]',
+    interestCalculatorButton:
+        '[data-component="button"][data-mod="interestCalculator"]',
+    mortgageRequestButton:
+        '[data-component="button"][data-mod="mortgageRequest"]',
     topHeader: '[data-component="topHeader"]',
     headerMobile: '[data-component="headerMobile"]',
     link: '[data-component="link"]',

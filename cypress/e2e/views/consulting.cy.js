@@ -30,39 +30,31 @@ describe('Check consulting page and content', () => {
                     .should('have.length', 3);
             });
         });
+        it('TESTcheck contact options', () => {
+            cy.get(selectors.contactOptions).within(() => {
+                cy.get(selectors.headline + selectors.h2).should(
+                    'contain',
+                    'Sie entscheiden, wie Sie beraten werden möchten!',
+                );
+                cy.get(selectors.contentCard).within(() => {
+                    cy.get(svg).each((svg) => {
+                        expect(svg).to.be.visible;
+                    });
+                });
+            });
+        });
         it('check contact options', () => {
             cy.get(selectors.contactOptions).within(() => {
                 cy.get(selectors.headline + selectors.h2).should(
                     'contain',
-                    ' Sie entscheiden, wie Sie beraten werden möchten! ',
+                    'Sie entscheiden, wie Sie beraten werden möchten!',
                 );
-                cy.get(selectors.contentCard).first(); // how to select multiple content cards with similar elements inside?
-                cy.get('svg')
-                    .first()
-                    .should('be.visible')
-                    .should('have.attr', 'viewBox', '0 0 576 576'); // why is it still matching all 3 svgs? solution with .first worked now but looks not right
-                cy.get('p').first().should('contain', 'Telefonberatung');
-                cy.get('a')
-                    .first()
-                    .should('have.attr', 'href', 'tel:+4917699392965');
-                cy.get(selectors.contentCard).next(); // doesn´t work at all
-                cy.get('svg')
-                    .next()
-                    .should('be.visible')
-                    .should('have.attr', 'viewBox', '0 0 40 28');
-                cy.get('p').next().should('contain', 'Videoberatung');
-                cy.get(selectors.button)
-                    .next()
-                    .should('contain', 'Termin vereinbaren');
-                cy.get(selectors.contentCard).last();
-                cy.get('svg')
-                    .last()
-                    .should('be.visible')
-                    .should('have.attr', 'viewBox', '0 0 488.4 488.4');
-                cy.get('p').last().should('contain', 'Vor-Ort-Beratung');
-                cy.get(selectors.button)
-                    .last()
-                    .should('contain', 'Termin vereinbaren');
+                cy.get(selectors.contentCard).each((svg) => {
+                    expect(svg).to.be.visible;
+                });
+                cy.get(selectors.contentCard).each((p) => {
+                    expect(p).to.be.visible;
+                });
             });
         });
     });

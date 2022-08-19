@@ -36,9 +36,7 @@ describe('Check aboutme page and content', () => {
     it('check "Eckdaten" section', () => {
         cy.get(selectors.contentCard).within(() => {
             cy.contains('Ein paar Eckdaten zu mir:').should('be.visible');
-            cy.get('ul.aboutMe__basicInfoList')
-                .children()
-                .should('have.length', 6);
+            cy.get('ul').children().should('have.length', 6);
         });
     });
 });

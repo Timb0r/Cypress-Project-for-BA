@@ -26,7 +26,7 @@ describe('Check contact page and content', () => {
             cy.get(selectors.button + selectors.send).should('be.visible');
         });
         it('check second content card and map', () => {
-            cy.get(selectors.contentCard).within(() => {
+            cy.get(selectors.contentCard).last().within(() => {
                 cy.get(selectors.headline + selectors.h2).should(
                     'contain',
                     'Ihr Weg zu mir:',

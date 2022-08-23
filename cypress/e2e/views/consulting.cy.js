@@ -30,30 +30,18 @@ describe('Check consulting page and content', () => {
                     .should('have.length', 3);
             });
         });
-        it('TESTcheck contact options', () => {
-            cy.get(selectors.contactOptions).within(() => {
-                cy.get(selectors.headline + selectors.h2).should(
-                    'contain',
-                    'Sie entscheiden, wie Sie beraten werden möchten!',
-                );
-                cy.get(selectors.contentCard).within(() => {
-                    cy.get(svg).each((svg) => {
-                        expect(svg).to.be.visible;
-                    });
-                });
-            });
-        });
         it('check contact options', () => {
             cy.get(selectors.contactOptions).within(() => {
                 cy.get(selectors.headline + selectors.h2).should(
                     'contain',
                     'Sie entscheiden, wie Sie beraten werden möchten!',
                 );
-                cy.get(selectors.contentCard).each((svg) => {
-                    expect(svg).to.be.visible;
-                });
-                cy.get(selectors.contentCard).each((p) => {
-                    expect(p).to.be.visible;
+                cy.get(selectors.contentCard).each((card) => {
+                    cy.get(card).within(() => {
+                        cy.get('svg').should('be.visible');
+                        cy.get('p').should('be.visible');
+                        cy.get(selectors.button).should('be.visible'); // doesn`t work because first is not a button
+                    });
                 });
             });
         });

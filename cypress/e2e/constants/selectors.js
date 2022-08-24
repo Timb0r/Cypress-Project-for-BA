@@ -1,6 +1,9 @@
 export default {
     cookieBanner: '[data-component="cookieBanner"]',
     button: '[data-component="button"]',
+    /* button_interestCalculator: `${button}[data-mod="interestCalculator"]`,
+    button_mortgageRequest: `${button}[data-mod="mortgageRequest"]`,
+    button_getToKnowMe: `${button}[data-mod="getToKnowMe"]`, */
     interestCalculatorButton:
         '[data-component="button"][data-mod="interestCalculator"]',
     mortgageRequestButton:
@@ -9,6 +12,7 @@ export default {
     topHeader: '[data-component="topHeader"]',
     headerMobile: '[data-component="headerMobile"]',
     link: '[data-component="link"]',
+    // linkBanner: `${link}[data-mod="banner"]`,
     image: '[data-component="image"]',
     logoArea: '[data-component="logoArea"]',
     textArea: '[data-component="textArea"]',
@@ -34,6 +38,8 @@ export default {
     introHints: '[data-component="introHints"]',
     benefitList: '[data-component="benefitList"]',
     bottomFooter: '[data-component="bottomFooter"]',
+    headline_h1: `${headline}[data-mod="h1"]`,
+    headline_h2: `${headline}[data-mod="h2"]`,
     h1: '[data-mod="h1"]',
     h2: '[data-mod="h2"]',
     banner: '[data-component="link"][data-mod="banner"]',

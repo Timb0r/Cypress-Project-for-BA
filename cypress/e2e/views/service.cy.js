@@ -6,7 +6,7 @@ describe('Check service page and content', () => {
         cy.visit(routes.service);
     });
     it('check headline', () => {
-        cy.get(selectors.headline + selectors.h1).should('contain', 'Service');
+        cy.get(headline_h1).should('contain', 'Service');
     });
     context('check contentrow', () => {
         it('check contentcard', () => {

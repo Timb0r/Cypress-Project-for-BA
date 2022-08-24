@@ -1,4 +1,4 @@
-import selectors from '../constants/selectors';
+import { componentSelectors, modSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
 describe('Check service page and content', () => {
@@ -6,19 +6,20 @@ describe('Check service page and content', () => {
         cy.visit(routes.service);
     });
     it('check headline', () => {
-        cy.get(headline_h1).should('contain', 'Service');
+        cy.get(componentSelectors.headline + modSelectors.h1).should(
+            'contain',
+            'Service',
+        );
     });
     context('check contentrow', () => {
         it('check contentcard', () => {
-            cy.get(selectors.contentCard).within(() => {
-                cy.get(selectors.interestCalculatorButton).should(
-                    'contain',
-                    'Zinssuche',
-                );
-                cy.get(selectors.mortgageRequestButton).should(
-                    'contain',
-                    'Antrag',
-                );
+            cy.get(componentSelectors.contentCard).within(() => {
+                cy.get(
+                    componentSelectors.button + modSelectors.interestCalculator,
+                ).should('contain', 'Zinssuche');
+                cy.get(
+                    componentSelectors.button + modSelectors.mortgageRequest,
+                ).should('contain', 'Antrag');
                 cy.get('p').should('have.length', 5);
             });
         });

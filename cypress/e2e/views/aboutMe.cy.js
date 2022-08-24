@@ -1,4 +1,4 @@
-import selectors from '../constants/selectors';
+import { componentSelectors, modSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
 describe('Check aboutme page and content', () => {
@@ -6,19 +6,19 @@ describe('Check aboutme page and content', () => {
         cy.visit(routes.aboutMe);
     });
     it('check title', () => {
-        cy.get(selectors.headline + selectors.h1).should(
+        cy.get(componentSelectors.headline + modSelectors.h1).should(
             'contain',
             'Lernen Sie mich kennen',
         );
     });
     context('check content box elements', () => {
         it('check name headline and subheadline', () => {
-            cy.get(selectors.contentCard).within(() => {
-                cy.get(selectors.headline + selectors.h2).should(
+            cy.get(componentSelectors.contentCard).within(() => {
+                cy.get(componentSelectors.headline + modSelectors.h2).should(
                     'contain',
                     'Manfred Hortt',
                 );
-                cy.get(selectors.subHeadline).should(
+                cy.get(componentSelectors.subHeadline).should(
                     'contain',
                     'Ihr Berater in Köln und Umgebung',
                 );
@@ -26,7 +26,7 @@ describe('Check aboutme page and content', () => {
         });
     });
     it('check image', () => {
-        cy.get(selectors.contentCard).within(() => {
+        cy.get(componentSelectors.contentCard).within(() => {
             cy.get('img')
                 .should('be.visible')
                 .should('have.attr', 'src', 'img/aboutMe.jpg')
@@ -34,7 +34,7 @@ describe('Check aboutme page and content', () => {
         });
     });
     it('check "Eckdaten" section', () => {
-        cy.get(selectors.contentCard).within(() => {
+        cy.get(componentSelectors.contentCard).within(() => {
             cy.contains('Ein paar Eckdaten zu mir:').should('be.visible');
             cy.get('ul').children().should('have.length', 6);
         });

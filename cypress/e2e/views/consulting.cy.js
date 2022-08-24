@@ -40,7 +40,7 @@ describe('Check consulting page and content', () => {
                     cy.get(card).within(() => {
                         cy.get('svg').should('be.visible');
                         cy.get('p').should('be.visible');
-                        cy.get(selectors.button).should('be.visible'); // doesn`t work because first is not a button
+                        cy.get('a,button').should('be.visible');
                     });
                 });
             });

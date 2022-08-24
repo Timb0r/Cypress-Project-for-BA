@@ -1,96 +1,48 @@
+import selectors from '../constants/selectors';
 import { routes } from '../constants/url';
 
-Cypress.Commands.add('inContent', (callback) => {
-    cy.get('main').within(callback);
-});
-
 describe('Check consulting page and content', () => {
-    context('check consulting content', () => {
-        beforeEach(() => {
-            cy.visit(routes.consulting);
-        });
-        it('check headline', () => {
-            cy.inContent(() => {
-                cy.get('.contentRow');
-                const contentHeadline = cy.get('p.contentHeadline');
-                contentHeadline
-                    .contains('Herzlich Willkommen')
-                    .should('be.visible');
+    beforeEach(() => {
+        cy.visit(routes.consulting);
+    });
+    context('check contentrow and contentcards', () => {
+        it('check first contentcard', () => {
+            cy.get(selectors.cardTextArea).within(() => {
+                cy.get('p').should('have.length', 3);
             });
         });
-        it('check first contentrow', () => {
-            cy.inContent(() => {
-                cy.get('.contentRow');
-                const contentBox1 = cy.get('div.contentCard').first();
-                contentBox1
-                    .contains(
-                        'Die Entscheidung zum Kauf oder Bau einer Immobilie gehört zu den wichtigsten Entscheidungen im Leben. Dabei sollte Ihr Anspruch an die Finanzierung entsprechend hoch sein.',
-                    )
-                    .should('be.visible');
-            });
-        });
-        it('check Zinssuche-button and modal', () => {
-            cy.inContent(() => {
-                cy.get('.contentRow');
-                const btnZinssuche = cy.get('div.contentCard').first();
-                btnZinssuche.contains('Zinssuche').click().should('be.visible');
-                cy.get('.modal');
-                const Zinsmodal = cy.get('div.modal__body');
-                Zinsmodal;
-                cy.get('.modal__modalClose').click();
-            });
-        });
-        it('check Antrag-button and modal', () => {
-            cy.inContent(() => {
-                cy.get('.contentRow');
-                const btnAntrag = cy.get('div.contentCard').first();
-                btnAntrag;
-                cy.contains('Antrag').click().should('be.visible');
-                cy.get('.modal');
-                const Antragmodal = cy.get('div.modal__body');
-                Antragmodal;
-                cy.get('.modal__modalClose').click();
-            });
-        });
-        it('check second contentrow', () => {
-            cy.inContent(() => {
-                cy.get('div.contentRow');
-                const contentBox2 = cy.get('div.contentCard').next();
-                contentBox2
-                    .contains(
-                        'Ihr Partner für unabhängige Immobilien­finanzierung',
-                    )
-                    .should('be.visible');
-                cy.get('div.contentRow');
-                const portrait = cy.get('img.home__image');
-                portrait
+        it('check image', () => {
+            cy.get(selectors.contentCard).within(() => {
+                cy.get('img')
                     .should('be.visible')
-                    .should('have.attr', 'src', 'img/hortt_rhein.jpg')
-                    .should('have.attr', 'alt', 'hortt_rhein');
+                    .should('have.attr', 'src', 'img/consultation.jpg')
+                    .should('have.attr', 'alt', 'hortt_consultation');
             });
         });
-        it('check second content card headline', () => {
-            cy.inContent(() => {
-                cy.get('.contentRow');
-                const btnKennenlernen = cy.get('div.contentCard').next();
-                btnKennenlernen;
-                cy.contains('Lernen sie mich kennen')
-                    .should('be.visible')
-                    .click();
-                cy.url().should(
+        it('check contentrow', () => {
+            cy.get(selectors.contentRow).within(() => {
+                cy.get(selectors.headline + selectors.h1).should(
                     'contain',
-                    'https://cy-borg.net/hortt-dev/#/uebermich',
+                    'Meine Leistungen für Sie:',
                 );
-                cy.go('back');
+                cy.get(selectors.benefitList)
+                    .children()
+                    .should('have.length', 3);
             });
         });
-        it('check h1 and h2 of second contentcard', () => {
-            cy.inContent(() => {
-                cy.get('.contentRow');
-                const btnKennenlernen = cy.get('div.contentCard').next();
-                btnKennenlernen;
-                cy.get('h1').should('contain', 'Manfred Hortt');
-                cy.get('h2').should('contain', 'Bankfachwirt'); // find solution for checking the whole text with br between //
+        it('check contact options', () => {
+            cy.get(selectors.contactOptions).within(() => {
+                cy.get(selectors.headline + selectors.h2).should(
+                    'contain',
+                    'Sie entscheiden, wie Sie beraten werden möchten!',
+                );
+                cy.get(selectors.contentCard).each((card) => {
+                    cy.get(card).within(() => {
+                        cy.get('svg').should('be.visible');
+                        cy.get('p').should('be.visible');
+                        cy.get('a,button').should('be.visible');
+                    });
+                });
             });
         });
     });

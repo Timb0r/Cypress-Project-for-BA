@@ -1,8 +1,8 @@
-import selectors from '../constants/selectors';
+import selectors, { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
 Cypress.Commands.add('inBanner', (callback) => {
-    cy.get(selectors.cookieBanner).within(callback);
+    cy.get(componentSelectors.cookieBanner).within(callback);
 });
 describe('cookie control tests', () => {
     beforeEach(() => {
@@ -16,7 +16,7 @@ describe('cookie control tests', () => {
 
         it('should be true after clicking cookies button', () => {
             cy.inBanner(() => {
-                cy.get(selectors.button).click();
+                cy.get(componentSelectors.button).click();
                 const cookieAccept = cy.getLocalStorage('cookie:accepted');
                 cookieAccept.should('equal', 'true');
             });
@@ -25,7 +25,7 @@ describe('cookie control tests', () => {
     context('test cookie banner handling', () => {
         it('should be hidden after button click', () => {
             cy.inBanner(() => {
-                const cookieButton = cy.get(selectors.button);
+                const cookieButton = cy.get(componentSelectors.button);
                 cookieButton.should('be.visible');
                 cookieButton.click();
                 cookieButton.should('not.be.visible');

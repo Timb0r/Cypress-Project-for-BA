@@ -1,7 +1,7 @@
 import { componentSelectors, modSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
-describe('check footer section and banner', () => {
+describe('check footer section', () => {
     beforeEach(() => {
         cy.visit(routes.home);
     });
@@ -11,12 +11,23 @@ describe('check footer section and banner', () => {
                 cy.get('svg').should('be.visible');
             });
         });
+        it('check amount of footer links', () => {
+            cy.get(componentSelectors.bottomFooter).within(() => {
+                cy.get(componentSelectors.link)
+                    .should('be.visible')
+                    .should('have.length', 4);
+                cy.get(componentSelectors.link + modSelectors.banner)
+                    .should('be.visible')
+                    .should('have.length', 2);
+            });
+        });
         it('check telephone number', () => {
             cy.get(componentSelectors.link + modSelectors.banner)
                 .first()
                 .should('be.visible')
-                .should('have.attr', 'href', 'tel:+4917699392965')
-                .and('have.attr', 'target', '_blank');
+                .should('have.attr', 'target', '_blank')
+                .invoke('attr', 'href')
+                .should('contain', 'tel:');
         });
         it('check mail address', () => {
             cy.get(componentSelectors.link + modSelectors.banner)
@@ -28,13 +39,6 @@ describe('check footer section and banner', () => {
                     'mailto:beratung@hortt-baufinanzierung.de',
                 )
                 .and('have.attr', 'target', '_blank');
-        });
-        it('check all footer links', () => {
-            cy.get(componentSelectors.bottomFooter).within(() => {
-                cy.get(componentSelectors.link)
-                    .should('be.visible')
-                    .should('have.length', 4);
-            });
         });
     });
 });

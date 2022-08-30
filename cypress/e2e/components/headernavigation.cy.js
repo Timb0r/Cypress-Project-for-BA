@@ -10,15 +10,18 @@ describe('check navigation area, navigation items and link goals', () => {
             cy.get(componentSelectors.navigation)
                 .should('be.visible')
                 .within(() => {
-                    cy.get('ul')
-                        .children()
+                    cy.get(componentSelectors.navigationItem)
+                        .should('be.visible')
                         .should('have.length', 5)
-                        .and('be.visible');
+                        .should('have.attr', 'href')
+                        .then((href) => {
+                            expect(href).to.contain('#/');
+                        });
                 });
         });
         it('check linkgoals', () => {
-            cy.get(componentSelectors.navigationItem).each((item) => {
-                cy.request(item.prop('href'));
+            cy.get(componentSelectors.navigationItem).click({
+                multiple: true,
             });
         });
     });

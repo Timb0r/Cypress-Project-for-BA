@@ -3,7 +3,7 @@ import { routes } from '../constants/url';
 
 describe('check headerimage and content', () => {
     beforeEach(() => {
-        cy.viewport(1920, 1080);
+        cy.viewport(1200, 768);
         cy.visit(routes.home);
     });
     context('check topheader links', () => {
@@ -63,7 +63,12 @@ describe('check headerimage and content', () => {
         });
         it('check header and logo sizes', () => {
             cy.get(componentSelectors.topHeader).within(() => {
-                cy.get('img').invoke('width').should('be.lessThan', 1920);
+                cy.get('img').invoke('width').should('be.lessThan', 1200);
+                cy.get(componentSelectors.logoArea).should('have.css', 'right');
+                //   .and('equal, 0'); last check doesnt work, tried different ways to check css
+
+                // maybe possible to check alignment of img and logo alignment
+                // or check transformation of headerimage and logo calc(100% - 300px)
             });
         });
     });

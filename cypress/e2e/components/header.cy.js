@@ -64,19 +64,20 @@ describe('check headerimage and content', () => {
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get('img').invoke('width').should('be.lessThan', 1920);
             });
-            cy.get(componentSelectors.topHeader).within(() => {
-                cy.get(componentSelectors.logoArea).should(
-                    'have.css',
-                    'position',
-                    'absolute',
-                );
-            });
+            cy.get(componentSelectors.topHeader);
+            cy.get(componentSelectors.logoArea)
+                .should('have.css', 'position', 'absolute')
+                .should('have.css', 'right', '> 0px');
         });
         it('check header and logo sizes in smaller breakpoint', () => {
             cy.viewport(1200, 768);
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get('img').invoke('width').should('be.lessThan', 900);
-                cy.get(componentSelectors.logoArea).should('have.css', 'right');
+                cy.get(componentSelectors.logoArea).should(
+                    'have.css',
+                    'right',
+                    '0px',
+                );
             });
         });
     });

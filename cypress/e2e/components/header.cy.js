@@ -46,7 +46,6 @@ describe('check headerimage and content', () => {
         it('check header image', () => {
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get('img')
-
                     .should('be.visible')
                     .should('have.attr', 'src', 'img/header.jpg');
             });
@@ -56,7 +55,7 @@ describe('check headerimage and content', () => {
                 cy.get(componentSelectors.logoArea)
                     .should('be.visible')
                     .within(() => {
-                        cy.get('svg');
+                        cy.get('svg').should('be.visible');
                         cy.get('p').should('have.length', 2);
                     });
             });
@@ -64,6 +63,20 @@ describe('check headerimage and content', () => {
         it('check header and logo sizes', () => {
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get('img').invoke('width').should('be.lessThan', 1920);
+            });
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get(componentSelectors.logoArea).should(
+                    'have.css',
+                    'position',
+                    'absolute',
+                );
+            });
+        });
+        it('check header and logo sizes in smaller breakpoint', () => {
+            cy.viewport(1200, 768);
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get('img').invoke('width').should('be.lessThan', 900);
+                cy.get(componentSelectors.logoArea).should('have.css', 'right');
             });
         });
     });

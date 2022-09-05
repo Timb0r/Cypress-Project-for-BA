@@ -19,24 +19,12 @@ describe('check navigation area, navigation items and link goals', () => {
                         });
                 });
         });
-        it('check linkgoals', () => {
-            cy.get(componentSelectors.navigationItem).click({
-                multiple: true, // wie schreibt man hier weiter? krieg nur fehler
-
-                // like expected status 200? expect(response.status).to.eq(200)
+        it('check linkgoals and highlights', () => {
+            cy.get(componentSelectors.navigationItem).each((item) => {
+                cy.get(item)
+                    .click()
+                    .should('have.attr', 'aria-current', 'page');
             });
-        });
-    });
-    context('highlighting of navigation link', () => {
-        it('check navigation highlight', () => {
-            cy.get(componentSelectors.navigationItem).should(
-                'have.attr',
-                'aria-current',
-                'page',
-            );
-            // if else durch alle links active, not active - sollte aber einfacher gehen
-            // .should('have.class','active',);
-            // problems selecting the right item and get the pseudo selector "active"
         });
     });
 });

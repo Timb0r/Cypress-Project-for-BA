@@ -11,9 +11,10 @@ describe('Check homepage and content', () => {
             cy.get(
                 componentSelectors.button + modSelectors.interestCalculator,
             ).click();
-            // iframe is clicked and opened but cant manage to grab it to go on
-            cy.get('.modal__topBar');
-            cy.get(componentSelectors.modal + modSelectors.interestCalculator); // optional: check if it is the right modal
+            cy.wait(1000);
+            cy.get('.modal__body').should('be.visible');
+            cy.get(componentSelectors.modal).should('be.visible');
+            cy.get(componentSelectors.modal + ' iframe'); // optional: check if it is the right modal
             cy.get(componentSelectors.button + modSelectors.close).click();
         });
     });

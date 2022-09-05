@@ -1,12 +1,12 @@
 import selectors, { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
-describe('check headerimage and content', () => {
+describe('header tests', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
         cy.visit(routes.home);
     });
-    context('check topheader links', () => {
+    context('topheader links', () => {
         it('check adress link', () => {
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get(componentSelectors.link)
@@ -42,15 +42,15 @@ describe('check headerimage and content', () => {
             });
         });
     });
-    context('check topheader images', () => {
-        it('check header image', () => {
+    context('topheader images', () => {
+        it('check image', () => {
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get('img')
                     .should('be.visible')
                     .should('have.attr', 'src', 'img/header.jpg');
             });
         });
-        it('check header logo', () => {
+        it('check logo', () => {
             cy.get(componentSelectors.topHeader).within(() => {
                 cy.get(componentSelectors.logoArea)
                     .should('be.visible')
@@ -60,24 +60,47 @@ describe('check headerimage and content', () => {
                     });
             });
         });
-        it('check header and logo sizes', () => {
+        it('check logo sizes', () => {
             cy.get(componentSelectors.topHeader).within(() => {
-                cy.get('img').invoke('width').should('be.lessThan', 1920);
+                // image has to be as big as the fullscreen width withou a padding
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 1860) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 1800); // scrollbar width can differ between devices
+                cy.get(componentSelectors.logoArea)
+                    .should('have.css', 'position', 'absolute')
+                    .invoke('css', 'right')
+                    .then((str) => parseInt(str))
+                    .should('be.gt', 0);
             });
-            cy.get(componentSelectors.topHeader);
-            cy.get(componentSelectors.logoArea)
-                .should('have.css', 'position', 'absolute')
-                .should('have.css', 'right', '> 0px');
         });
-        it('check header and logo sizes in smaller breakpoint', () => {
+        it('check logo sizes in smaller breakpoint', () => {
             cy.viewport(1200, 768);
+            cy.wait(1000); // wait for image transition
             cy.get(componentSelectors.topHeader).within(() => {
-                cy.get('img').invoke('width').should('be.lessThan', 900);
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 840) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 820); // scrollbar width can differ between devices
                 cy.get(componentSelectors.logoArea).should(
                     'have.css',
                     'right',
                     '0px',
                 );
+            });
+        });
+        it('check image transition when switching breakpoint', () => {
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.viewport(1200, 768);
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 1100) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 840); // depending how fast cypress runs on device
+                cy.wait(1000); // wait for image transition
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 840) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 820); // scrollbar width can differ between devices
             });
         });
     });

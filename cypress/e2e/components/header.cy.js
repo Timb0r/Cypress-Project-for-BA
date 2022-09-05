@@ -1,42 +1,37 @@
-import selectors from '../constants/selectors';
+import { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
-Cypress.Commands.add('inHeader', (callback) => {
-    cy.get('header').within(callback);
-});
-
-describe('check headerimage and content', () => {
+describe('header tests', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
         cy.visit(routes.home);
     });
-    context('check topheader links', () => {
+    context('topheader links', () => {
         it('check adress link', () => {
-            cy.inHeader(() => {
-                const adressLink = cy.get(selectors.link);
-                adressLink
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get(componentSelectors.link)
                     .should('be.visible')
                     .should(
                         'have.attr',
                         'href',
-                        'https://goo.gl/maps/xbWR9XYkN4PDnfGh8', // URL hat sich geändert und deshalb failed. daher besser lösen single point of truth?
+                        'https://goo.gl/maps/xbWR9XYkN4PDnfGh8',
                     )
                     .should('have.attr', 'target', '_blank');
             });
         });
         it('check phone number', () => {
-            cy.inHeader(() => {
-                const phoneNumber = cy.get('a.topHeader__topLink').next();
-                phoneNumber
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get(componentSelectors.link)
+                    .next()
                     .should('be.visible')
                     .should('have.attr', 'href', 'tel:+4917699392965')
                     .should('have.attr', 'target', '_blank');
             });
         });
         it('check mailto', () => {
-            cy.inHeader(() => {
-                const sendEmail = cy.get('a.topHeader__topLink').last();
-                sendEmail
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get(componentSelectors.link)
+                    .last()
                     .should('be.visible')
                     .should(
                         'have.attr',
@@ -47,29 +42,65 @@ describe('check headerimage and content', () => {
             });
         });
     });
-    context('check topheader images', () => {
-        it('check header image', () => {
-            cy.inHeader(() => {
-                const headerImage = cy.get('img.topHeader__image');
-                headerImage
+    context('topheader images', () => {
+        it('check image', () => {
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get('img')
                     .should('be.visible')
                     .should('have.attr', 'src', 'img/header.jpg');
             });
         });
-        it('check header logo', () => {
-            cy.inHeader(() => {
-                const logoArea = cy.get('div.topHeader__logoArea');
-                logoArea.should('be.visible');
-                logoArea.within(() => {
-                    cy.get('svg');
-                    cy.get('p').should('have.length', 2);
-                });
+        it('check logo', () => {
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get(componentSelectors.logoArea)
+                    .should('be.visible')
+                    .within(() => {
+                        cy.get('svg').should('be.visible');
+                        cy.get('p').should('have.length', 2);
+                    });
             });
         });
-        it('check header and logo sizes', () => {
-            cy.inHeader(() => {
-                const headerImage = cy.get('img.topHeader__image');
-                headerImage.invoke('width').should('be.lessThan', 1920);
+        it('check logo sizes', () => {
+            cy.get(componentSelectors.topHeader).within(() => {
+                // image has to be as big as the fullscreen width withou a padding
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 1860) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 1800); // scrollbar width can differ between devices
+                cy.get(componentSelectors.logoArea)
+                    .should('have.css', 'position', 'absolute')
+                    .invoke('css', 'right')
+                    .then((str) => parseInt(str))
+                    .should('be.gt', 0);
+            });
+        });
+        it('check logo sizes in smaller breakpoint', () => {
+            cy.viewport(1200, 768);
+            cy.wait(1000); // wait for image transition
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 840) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 820); // scrollbar width can differ between devices
+                cy.get(componentSelectors.logoArea).should(
+                    'have.css',
+                    'right',
+                    '0px',
+                );
+            });
+        });
+        it('check image transition when switching breakpoint', () => {
+            cy.get(componentSelectors.topHeader).within(() => {
+                cy.viewport(1200, 768);
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 1100) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 840); // depending how fast cypress runs on device
+                cy.wait(1000); // wait for image transition
+                cy.get('img')
+                    .invoke('width')
+                    .should('be.lessThan', 840) // substract logo, body padding and scrollbar
+                    .should('be.greaterThan', 820); // scrollbar width can differ between devices
             });
         });
     });

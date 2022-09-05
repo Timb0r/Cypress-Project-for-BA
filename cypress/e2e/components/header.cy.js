@@ -1,6 +1,10 @@
 import { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
+const withinTopHeader = (callback) => {
+    cy.get(componentSelectors.topHeader).within(callback);
+};
+
 describe('header tests', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
@@ -8,7 +12,7 @@ describe('header tests', () => {
     });
     context('topheader links', () => {
         it('check adress link', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.get(componentSelectors.link)
                     .should('be.visible')
                     .should(
@@ -20,7 +24,7 @@ describe('header tests', () => {
             });
         });
         it('check phone number', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.get(componentSelectors.link)
                     .next()
                     .should('be.visible')
@@ -29,7 +33,7 @@ describe('header tests', () => {
             });
         });
         it('check mailto', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.get(componentSelectors.link)
                     .last()
                     .should('be.visible')
@@ -44,14 +48,14 @@ describe('header tests', () => {
     });
     context('topheader images', () => {
         it('check image', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.get('img')
                     .should('be.visible')
                     .should('have.attr', 'src', 'img/header.jpg');
             });
         });
         it('check logo', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.get(componentSelectors.logoArea)
                     .should('be.visible')
                     .within(() => {
@@ -61,7 +65,7 @@ describe('header tests', () => {
             });
         });
         it('check logo sizes', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 // image has to be as big as the fullscreen width withou a padding
                 cy.get('img')
                     .invoke('width')
@@ -77,7 +81,7 @@ describe('header tests', () => {
         it('check logo sizes in smaller breakpoint', () => {
             cy.viewport(1200, 768);
             cy.wait(1000); // wait for image transition
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.get('img')
                     .invoke('width')
                     .should('be.lessThan', 840) // substract logo, body padding and scrollbar
@@ -90,7 +94,7 @@ describe('header tests', () => {
             });
         });
         it('check image transition when switching breakpoint', () => {
-            cy.get(componentSelectors.topHeader).within(() => {
+            withinTopHeader(() => {
                 cy.viewport(1200, 768);
                 cy.get('img')
                     .invoke('width')

@@ -12,7 +12,7 @@ describe('Check privacyPolicy page and content', () => {
         );
     });
     context('check contentcard and content', () => {
-        it('check h2 headlines', () => {
+        it('check amount of h2 headlines', () => {
             cy.get(componentSelectors.contentCard).within(() => {
                 cy.get(componentSelectors.headline + modSelectors.h2).should(
                     'have.length',
@@ -20,7 +20,7 @@ describe('Check privacyPolicy page and content', () => {
                 );
             });
         });
-        it('check h3 headlines', () => {
+        it('check amount of h3 headlines', () => {
             cy.get(componentSelectors.contentCard).within(() => {
                 cy.get('h3').should('be.visible').should('have.length', 20);
             });

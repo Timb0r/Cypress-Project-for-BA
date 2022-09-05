@@ -1,4 +1,4 @@
-import selectors, { componentSelectors } from '../constants/selectors';
+import { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
 describe('header tests', () => {

@@ -12,7 +12,7 @@ describe('Check service page and content', () => {
         );
     });
     context('check contentrow', () => {
-        it('check contentcard', () => {
+        it('check button texts', () => {
             cy.get(componentSelectors.contentCard).within(() => {
                 cy.get(
                     componentSelectors.button + modSelectors.interestCalculator,
@@ -20,6 +20,10 @@ describe('Check service page and content', () => {
                 cy.get(
                     componentSelectors.button + modSelectors.mortgageRequest,
                 ).should('contain', 'Antrag');
+            });
+        });
+        it('check amount of paragraphs', () => {
+            cy.get(componentSelectors.contentCard).within(() => {
                 cy.get('p').should('have.length', 5);
             });
         });

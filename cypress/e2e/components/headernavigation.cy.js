@@ -1,4 +1,4 @@
-import selectors, { componentSelectors } from '../constants/selectors';
+import { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
 describe('check navigation area, navigation items and link goals', () => {

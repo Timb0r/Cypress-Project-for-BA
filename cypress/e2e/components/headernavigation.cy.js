@@ -1,27 +1,29 @@
-import selectors from '../constants/selectors';
+import { componentSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
-Cypress.Commands.add('inHeader', (callback) => {
-    cy.get('header').within(callback);
-});
-
-describe('navigation area and navigation items', () => {
+describe('check navigation area, navigation items and link goals', () => {
     beforeEach(() => {
         cy.visit(routes.home);
     });
     context('navigation area and linkgoals', () => {
-        it('check navlinks', () => {
-            cy.inHeader(() => {
-                cy.get('nav').should('be.visible');
-            });
+        it('check navigation area and navigation items', () => {
+            cy.get(componentSelectors.navigation)
+                .should('be.visible')
+                .within(() => {
+                    cy.get(componentSelectors.navigationItem)
+                        .should('be.visible')
+                        .should('have.length', 5)
+                        .should('have.attr', 'href')
+                        .then((href) => {
+                            expect(href).to.contain('#/');
+                        });
+                });
         });
-        it('check linkgoals', () => {
-            cy.inHeader(() => {
-                cy.get('a[href*="#/uebermich"]').should('be.visible'); // iterieren nicht einzeln getten
-                cy.get('a[href*="#/beratung"]').should('be.visible');
-                cy.get('a[href*="#/"]').should('be.visible');
-                cy.get('a[href*="#/service"]').should('be.visible');
-                cy.get('a[href*="#/kontakt"]').should('be.visible');
+        it('check linkgoals and highlights', () => {
+            cy.get(componentSelectors.navigationItem).each((item) => {
+                cy.get(item)
+                    .click()
+                    .should('have.attr', 'aria-current', 'page');
             });
         });
     });

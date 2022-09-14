@@ -47,6 +47,7 @@ export const modSelectors = {
     salutation: '[data-mod="salutation"]',
     name: '[data-mod="name"]',
     email: '[data-mod="email"]',
+    phone: '[data-mod="phone"]',
     hpot1: '[data-mod="hpot1"]',
     send: '[data-mod="send"]',
     contactOptions: '[data-mod="contactOptions"]',

@@ -1,7 +1,4 @@
-import selectors, {
-    componentSelectors,
-    modSelectors,
-} from '../constants/selectors';
+import { componentSelectors, modSelectors } from '../constants/selectors';
 import { routes } from '../constants/url';
 
 describe('Check contact page and content', () => {

@@ -37,17 +37,20 @@ describe('Check homepage and content', () => {
                     'contain',
                     'Manfred Hortt',
                 );
-                cy.get(componentSelectors.headline + modSelectors.h2).should(
-                    'contain',
-                    'Bankfachwirt',
-                ); // find solution for checking the whole text with br between (Bankfachwirt br Baufinanzierung) //
-                cy.get(componentSelectors.introHints).should(
-                    'contain',
-                    'Kompetent',
-                ); // find solution for checking the whole text with br between
-                cy.get(
-                    componentSelectors.button + modSelectors.getToKnowMe,
-                ).should('contain', 'Lernen sie mich kennen');
+                cy.get(componentSelectors.headline + modSelectors.h2)
+                    .should('contain', 'Bankfachwirt')
+                    .should('contain', 'Baufinanzierung');
+                cy.get(componentSelectors.introHints)
+                    .should('contain', 'Kompetent')
+                    .should('contain', 'Flexibel')
+                    .should('contain', 'Persönlich')
+                    .should('contain', 'Unabhängig');
+                cy.get(componentSelectors.button + modSelectors.getToKnowMe)
+                    .should('contain', 'Lernen sie mich kennen')
+                    .click();
+                cy.on('url:changed', (newUrl) => {
+                    expect(newUrl).to.contain('uebermich');
+                });
             });
         });
     });

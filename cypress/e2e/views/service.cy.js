@@ -27,5 +27,11 @@ describe('Check service page and content', () => {
                 cy.get('p').should('have.length', 5);
             });
         });
+        it('check Zinssuche modal', () => {
+            cy.testModal(modSelectors.interestCalculator, 'Zinssuche');
+        });
+        it('check Antrag modal', () => {
+            cy.testModal(modSelectors.mortgageRequest, 'Antrag');
+        });
     });
 });

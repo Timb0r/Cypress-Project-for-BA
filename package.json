@@ -11,6 +11,10 @@
         "type": "git",
         "url": "git+https://github.com/Timb0r/Cypress-Project-for-BA.git"
     },
+    "engines": {
+        "node": "16.17.0",
+        "npm": "8.15.0"
+    },
     "author": "timb0r",
     "license": "ISC",
     "bugs": {
@@ -18,12 +22,13 @@
     },
     "homepage": "https://github.com/Timb0r/Cypress-Project-for-BA#readme",
     "devDependencies": {
-        "cypress": "^10.3.0",
-        "cypress-localstorage-commands": "^1.5.0",
-        "eslint": "^8.1.0",
-        "eslint-plugin-cypress": "^2.12.1",
-        "eslint-plugin-prettier": "^4.0.0",
-        "prettier": "2.4.1"
+        "cypress": "10.7.0",
+        "cypress-localstorage-commands": "1.7.0",
+        "eslint": "8.22.0",
+        "eslint-config-prettier": "7.2.0",
+        "eslint-plugin-cypress": "2.12.1",
+        "eslint-plugin-prettier": "4.2.1",
+        "prettier": "2.7.1"
     },
     "dependencies": {}
 }

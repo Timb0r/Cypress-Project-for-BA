@@ -4,8 +4,17 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:prettier/recommended",
-        "plugin:cypress/recommended"
+        "plugin:cypress/recommended",
+        "plugin:prettier/recommended"
     ],
-    "plugins": ["cypress"]
+    "plugins": ["cypress"],
+    "rules": {
+        "cypress/no-unnecessary-waiting": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
+    }
 }

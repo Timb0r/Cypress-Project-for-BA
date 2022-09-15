@@ -66,10 +66,10 @@ describe('header tests', () => {
         });
         it('check logo sizes', () => {
             withinTopHeader(() => {
-                // image has to be as big as the fullscreen width withou a padding
+                // image has to be as big as the fullscreen width without a padding
                 cy.get('img')
                     .invoke('width')
-                    .should('be.lessThan', 1860) // substract logo, body padding and scrollbar
+                    .should('be.lessThan', 1860) // subtract logo, body padding and scrollbar
                     .should('be.greaterThan', 1800); // scrollbar width can differ between devices
                 cy.get(componentSelectors.logoArea)
                     .should('have.css', 'position', 'absolute')
@@ -84,7 +84,7 @@ describe('header tests', () => {
             withinTopHeader(() => {
                 cy.get('img')
                     .invoke('width')
-                    .should('be.lessThan', 840) // substract logo, body padding and scrollbar
+                    .should('be.lessThan', 840) // subtract logo, body padding and scrollbar
                     .should('be.greaterThan', 820); // scrollbar width can differ between devices
                 cy.get(componentSelectors.logoArea).should(
                     'have.css',
@@ -98,12 +98,12 @@ describe('header tests', () => {
                 cy.viewport(1200, 768);
                 cy.get('img')
                     .invoke('width')
-                    .should('be.lessThan', 1100) // substract logo, body padding and scrollbar
+                    .should('be.lessThan', 1100) // subtract logo, body padding and scrollbar
                     .should('be.greaterThan', 840); // depending how fast cypress runs on device
                 cy.wait(1000); // wait for image transition
                 cy.get('img')
                     .invoke('width')
-                    .should('be.lessThan', 840) // substract logo, body padding and scrollbar
+                    .should('be.lessThan', 840) // subtract logo, body padding and scrollbar
                     .should('be.greaterThan', 820); // scrollbar width can differ between devices
             });
         });

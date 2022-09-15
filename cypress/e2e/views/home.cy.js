@@ -53,5 +53,11 @@ describe('Check homepage and content', () => {
                 });
             });
         });
+        it('check Zinssuche modal', () => {
+            cy.testModal(modSelectors.interestCalculator, 'Zinssuche');
+        });
+        it('check Antrag modal', () => {
+            cy.testModal(modSelectors.mortgageRequest, 'Antrag');
+        });
     });
 });
